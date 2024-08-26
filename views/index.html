@@ -30,5 +30,29 @@
           <a href="http://www.freecodecamp.com">freeCodeCamp</a>
         </p>
       </div>
+      <script>
+        document.querySelector('form').addEventListener('submit', async function(event) {
+          event.preventDefault();
+      
+          const form = event.target;
+          const formData = new FormData(form);
+      
+          try {
+            const response = await fetch('/api/fileanalyse', {
+              method: 'POST',
+              body: formData
+            });
+      
+            const result = await response.json();
+      
+            // Display the file details
+            const output = document.getElementById('output');
+            output.innerText = `File Name: ${result.fileName}\nFile Type: ${result.fileType}\nFile Size: ${result.fileSize} bytes`;
+          } catch (error) {
+            console.error('Error uploading file:', error);
+            document.getElementById('output').innerText = 'Failed to upload file.';
+          }
+        });
+      </script>
    </body>
 </html>
