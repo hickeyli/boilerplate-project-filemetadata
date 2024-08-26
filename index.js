@@ -13,8 +13,6 @@ app.get('/', function (req, res) {
 });
 
 
-const app = express();
-
 // Middleware for handling file uploads
 const upload = multer();
 
